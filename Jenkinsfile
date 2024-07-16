@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/kaiopiterson/spring'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/kaiopiterson/globo'
             }
         }
         stage('Build Spring Boot') {
