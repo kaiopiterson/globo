@@ -49,6 +49,7 @@ pipeline {
                 withCredentials([file(credentialsId: env.KUBECONFIG_CREDENTIALS_ID, variable: 'KUBECONFIG')]) {
                     sh 'kubectl apply -f deployment.yaml --kubeconfig=$KUBECONFIG'
                     sh 'kubectl apply -f service_nodePort.yaml --kubeconfig=$KUBECONFIG'
+                    sh 'kubectl apply -f ingress.yaml --kubeconfig=$KUBECONFIG'
                 }
             }
         }
