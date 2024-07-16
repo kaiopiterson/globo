@@ -1,14 +1,21 @@
-# Use a imagem do OpenJDK como base
-FROM openjdk:8-jdk-alpine
+# Use uma imagem base oficial do Python
+FROM python:3.8-slim
 
-# Crie um diretório de trabalho no contêiner
+# Defina o diretório de trabalho no contêiner
 WORKDIR /app
 
-# Copie o arquivo WAR para o diretório de trabalho no contêiner
-COPY target/springexample-0.0.1-SNAPSHOT.war /app/app.war
+# Copie o arquivo requirements.txt para o diretório de trabalho
+COPY requirements.txt .
 
-# Exponha a porta 8080
-EXPOSE 8080
+# Instale as dependências do Python
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Comando para executar a aplicação
-ENTRYPOINT ["java", "-jar", "/app/app.war"]
+# Copie todo o conteúdo do diretório atual para o diretório de trabalho no contêiner
+COPY . .
+
+# Exponha a porta que a aplicação vai rodar
+EXPOSE 5000
+
+# Defina o comando para rodar a aplicação
+CMD ["python", "app.py"]
+

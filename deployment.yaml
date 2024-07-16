@@ -1,32 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springboot-deployment
+  name: comments-api
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: springboot-app
+      app: comments-api
   template:
     metadata:
       labels:
-        app: springboot-app
+        app: comments-api
     spec:
       containers:
-      - name: springboot-app
-        image: kaiopiterson/springboot-app:latest
+      - name: comments-api
+        image: kaiopiterson/comments-api:latest
         ports:
-        - containerPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: springboot-service
-spec:
-  type: ClusterIP
-  selector:
-    app: springboot-app
-  ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
+        - containerPort: 5000
+
