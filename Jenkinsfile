@@ -20,6 +20,14 @@ pipeline {
                 '''
             }
         }
+        stage('Start Exporter') {
+            steps {
+                sh '''
+                    . venv/bin/activate
+                    nohup python exporter.py &
+                '''
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t comments-api .'
